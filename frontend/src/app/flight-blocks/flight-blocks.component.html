@@ -1,0 +1,16 @@
+<div class="card flight-card mb-4 shadow-lg">
+  <img [src]="flightData.picture_url" alt="Flight Thumbnail" class="card-img-top flight-image">
+  <div class="card-body">
+    <h5 class="card-title flight-name">{{ flightData.airline_name }}</h5>
+    <p class="card-text flight-description">{{ flightData.description }}</p>
+    <p class="card-text"><strong>Departure:</strong> {{ flightData.departure }}</p>
+    <p class="card-text"><strong>Destination:</strong> {{ flightData.dest }}</p>
+    <p class="card-text"><strong>Price:</strong> ${{ flightData.price }}</p>
+    <p class="card-text"><strong>Seats Left:</strong> {{ flightData.seats_left }}</p>
+    <p class="card-text"><strong>Departure Date:</strong> {{ flightData.departure_date | date }}</p>
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn custom-btn-book">Book Now</button>
+      <button class="btn custom-btn-details">View Details</button>
+    </div>
+  </div>
+</div>
