@@ -876,28 +876,32 @@ class ReviewController extends Controller
 
     public function getAllFlightReviewStats()
     {
+        // الحصول على جميع الرحلات الجوية
         $flights = Flight::all();
 
         if ($flights->isEmpty()) {
             return response()->json(['error' => 'No flights found.'], 404);
         }
 
+        // جمع إحصاءات التقييمات لكل رحلة جوية
         $flightStats = $flights->map(function ($flight) {
-            $reviews = Review::where('reviewable_type', 'App\Models\Flight')
+            // الحصول على جميع التقييمات الخاصة بالرحلة الجوية
+            $reviews = Review::where('reviewable_type', Flight::class)
                 ->where('reviewable_id', $flight->id)
                 ->get();
 
             $count = $reviews->count();
-            $averageRating = $reviews->avg('rating');
+            $averageRating = $count > 0 ? $reviews->avg('rating') : null;
 
             return [
                 'flight' => [
                     'id' => $flight->id,
-                    'flight_number' => $flight->flight_number,
-                    'departure_date' => $flight->departure_date,
-                    'arrival_date' => $flight->arrival_date,
+                    'departure' => $flight->departure, // تأكد من تطابق هذه الحقول مع قاعدة البيانات
+                    'dest' => $flight->dest,
                     'price' => $flight->price,
-                    'airline' => $flight->airline,
+                    'airline_name' => $flight->airline_name,
+                    'picture_url' => $flight->picture_url,
+                    'departure_date' => $flight->departure_date,
                 ],
                 'number_of_reviews' => $count,
                 'average_rating' => $averageRating,
@@ -906,6 +910,7 @@ class ReviewController extends Controller
 
         return response()->json($flightStats, 200);
     }
+
 
     /**
      * @OA\Get(
@@ -960,8 +965,9 @@ class ReviewController extends Controller
                     'name' => $hotel->name,
                     'location' => $hotel->location,
                     'price_per_night' => $hotel->price_per_night,
-                    'rating' => $hotel->rating,
-                    'picture_url' => $hotel->picture_url,
+                    'stars' => $hotel->rating, // استخدام التقييم بدلاً من stars
+                    'picture_url' => $hotel->thumbnail_url, // تغيير thumbnail_url إلى picture_url
+                     'description'  => $hotel->description,
                 ],
                 'number_of_reviews' => $count,
                 'average_rating' => $averageRating,
@@ -969,6 +975,171 @@ class ReviewController extends Controller
         });
 
         return response()->json($hotelStats, 200);
+    }
+
+    public function getCarDetailsAndReviews($carId)
+    {
+        // البحث عن السيارة
+        $car = Car::find($carId);
+
+        if (!$car) {
+            return response()->json(['error' => 'Car not found'], 404);
+        }
+
+        try {
+            // جمع التفاصيل عن السيارة
+            $reviews = Review::where('reviewable_type', 'App\Models\Car')
+                ->where('reviewable_id', $car->id)
+                ->get();
+
+            $count = $reviews->count();
+            $averageRating = $reviews->avg('rating');
+
+            // جمع تفاصيل السيارة ونتائج التقييم
+            $carDetails = [
+                'car' => [
+                    'id' => $car->id,
+                    'brand' => $car->brand,
+                    'man_date' => $car->man_date,
+                    'price_per_hour' => $car->price_per_hour,
+                    'colour' => $car->colour,
+                    'picture_url' => $car->picture_url,
+                    'type' => $car->type,
+                ],
+                'number_of_reviews' => $count,
+                'average_rating' => $averageRating,
+            ];
+
+            // جمع تعليقات التقييمات
+            $reviews = $car->carBookings()->with('review', 'user')->get()->map(function ($booking) {
+                return [
+                    'id' => $booking->review->id,
+                    'username' => $booking->user->username,
+                    'comment' => $booking->review ? $booking->review->comment : null,
+                    'rating' => $booking->review ? $booking->review->rating : null,
+                    'date' => $booking->review ? $booking->review->created_at->format('Y-m-d') : null, // إضافة تاريخ التعليق
+                ];
+            });
+
+            // إرجاع التفاصيل والتقييمات كاستجابة
+            return response()->json([
+                'carDetails' => $carDetails,
+                'reviews' => $reviews
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function getHotelDetailsAndReviews($hotelId)
+    {
+        // البحث عن الفندق
+        $hotel = Hotel::find($hotelId);
+
+        if (!$hotel) {
+            return response()->json(['error' => 'Hotel not found'], 404);
+        }
+
+        try {
+            // جمع التفاصيل عن الفندق
+            $reviews = Review::where('reviewable_type', 'App\Models\Hotel')
+                ->where('reviewable_id', $hotel->id)
+                ->get();
+
+            $count = $reviews->count();
+            $averageRating = $reviews->avg('rating');
+
+            // جمع تفاصيل الفندق ونتائج التقييم
+            $hotelDetails = [
+                'hotel' => [
+                    'id' => $hotel->id,
+                    'name' => $hotel->name,
+                    'location' => $hotel->location,
+                    'price_per_night' => $hotel->price_per_night,
+                    'stars' => $hotel->rating, // استخدام التقييم بدلاً من stars
+                    'picture_url' => $hotel->thumbnail_url, // تغيير thumbnail_url إلى picture_url
+                    'description'  => $hotel->description,
+
+                ],
+                'number_of_reviews' => $count,
+                'average_rating' => $averageRating,
+            ];
+
+            // جمع تعليقات التقييمات
+            $reviews = $hotel->hotelsBookings()->with('review', 'user')->get()->map(function ($booking) {
+                return [
+                    'username' => $booking->user->username,
+                    'comment' => $booking->review ? $booking->review->comment : null,
+                    'rating' => $booking->review ? $booking->review->rating : null,
+                    'date' => $booking->review ? $booking->review->created_at->format('Y-m-d') : null,
+                ];
+            });
+
+            // إرجاع التفاصيل والتقييمات كاستجابة
+            return response()->json([
+                'hotelDetails' => $hotelDetails,
+                'reviews' => $reviews
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+        }
+    }
+    public function getFlightDetailsAndReviews($flightId)
+    {
+        // البحث عن الرحلة الجوية
+        $flight = Flight::find($flightId);
+
+        if (!$flight) {
+            return response()->json(['error' => 'Flight not found'], 404);
+        }
+
+        try {
+            // جمع التقييمات الخاصة بالرحلة الجوية
+            $reviews = Review::where('reviewable_type', 'App\Models\Flight')
+                ->where('reviewable_id', $flight->id)
+                ->get();
+
+            $count = $reviews->count();
+            $averageRating = $reviews->avg('rating');
+
+            // جمع تفاصيل الرحلة الجوية ونتائج التقييم
+            $flightDetails = [
+                'flight' => [
+                    'id' => $flight->id,
+                    'departure' => $flight->departure,
+                    'dest' => $flight->dest,
+                    'price' => $flight->price,
+                    'seats_left' => $flight->seats_left,
+                    'description' => $flight->description,
+                    'departure_date' => $flight->departure_date,
+                    'airline_name' => $flight->airline_name,
+                    'picture_url' => $flight->picture_url,
+                ],
+                'number_of_reviews' => $count,
+                'average_rating' => $averageRating,
+            ];
+
+            // جمع تعليقات التقييمات
+            $reviews = $flight->flightsBookings()->with('review', 'user')->get()->map(function ($booking) {
+                return [
+                    'username' => $booking->user->username,
+                    'comment' => $booking->review ? $booking->review->comment : null,
+                    'rating' => $booking->review ? $booking->review->rating : null,
+                    'date' => $booking->review ? $booking->review->created_at->format('Y-m-d') : null,
+                ];
+            });
+
+            // إرجاع التفاصيل والتقييمات كاستجابة
+            return response()->json([
+                'flightDetails' => $flightDetails,
+                'reviews' => $reviews
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
+        }
     }
 
 

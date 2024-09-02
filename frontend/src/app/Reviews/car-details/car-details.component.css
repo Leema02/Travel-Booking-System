@@ -1,0 +1,73 @@
+/* تحسينات Card تفاصيل السيارة */
+.car-card {
+  border-radius: 20px; /* Ensure consistent rounding */
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(135deg, #fff 0%, #dfe9f3 100%); /* Match car-card background */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.car-card:hover {
+  transform: scale(1.05); /* Consistent hover effect */
+}
+
+.car-card img {
+  transition: transform 0.3s ease-in-out;
+  border-bottom: 4px solid #1A374D;
+}
+
+.car-card:hover img {
+  transform: scale(1.1); /* Consistent image hover effect */
+}
+
+.custom-btn {
+  background-color: #1A374D; /* Match car-card button color */
+  border: none;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.custom-btn:hover {
+  background-color: #406882;
+  transform: scale(1.05);
+}
+
+.stars i {
+  transition: color 0.3s ease-in-out;
+}
+
+.stars i:hover {
+  color: #FFD700;
+}
+
+/* تحسينات قسم التعليقات */
+.review-card {
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.review-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.reviewer-image {
+  border: 2px solid #007bff;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.reviewer-image:hover {
+  border-color: #0056b3;
+}
+
+.review-text {
+  font-size: 18px;
+  color: #333;
+}
+
+.reviewer-name {
+  font-weight: 600;
+}

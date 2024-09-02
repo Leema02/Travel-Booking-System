@@ -1,0 +1,28 @@
+<!-- flights-pagee.component.html -->
+<div class="bodyy container mt-5">
+  <div class="row">
+    <div *ngFor="let flight of flights" class="col-md-4">
+      <div class="card mb-4 shadow-lg flight-card animate__animated animate__fadeInUp">
+        <img [src]="flight.flight.picture_url || 'path/to/default/image.jpg'" class="card-img-top img-fluid" alt="Flight Image">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ flight.flight.airline_name || 'Unknown Airline' }}</h5>
+          <p class="card-text"><strong>Departure:</strong> {{ flight.flight.departure || 'N/A' }}</p>
+          <p class="card-text"><strong>Destination:</strong> {{ flight.flight.dest || 'Unknown Destination' }}</p>
+          <p class="card-text"><strong>Price:</strong> ${{ flight.flight.price || 'N/A' }}</p>
+          <p class="card-text"><strong>Departure Date:</strong> {{ flight.flight.departure_date | date:'yyyy-MM-dd' }}</p>
+          <p class="card-text">
+            Average Rating:
+            <span class="stars">
+              <i class="fas fa-star" *ngFor="let star of [].constructor(Math.floor(flight.average_rating || 0))" style="color: #FFD700;"></i>
+              <i class="fas fa-star-half-alt" *ngIf="flight.average_rating && flight.average_rating % 1 >= 0.5" style="color: #FFD700;"></i>
+              <i class="far fa-star" *ngFor="let emptyStar of [].constructor(5 - Math.ceil(flight.average_rating || 0))" style="color: #FFD700;"></i>
+            </span>
+            {{ flight.average_rating ? (flight.average_rating | number: '1.1-2') : 'No rating' }}
+          </p>
+          <p class="card-text"><small class="text-muted">Number of Reviews: {{ flight.number_of_reviews || 0 }}</small></p>
+          <a [routerLink]="['/Review/flight', flight.flight.id]" class="btn btn-primary custom-btn">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

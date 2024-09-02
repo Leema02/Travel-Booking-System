@@ -1,0 +1,61 @@
+/* flights-pagee.component.css */
+
+/* Animation Classes */
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+
+.bodyy {
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  font-family: 'Poppins', sans-serif;
+  padding: 20px; /* Ensure padding if needed */
+}
+
+.card-title {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #1A374D;
+}
+
+.flight-card {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  background: linear-gradient(135deg, #fff 0%, #dfe9f3 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.flight-card:hover {
+  transform: scale(1.08);
+}
+
+.flight-card img {
+  transition: transform 0.3s ease-in-out;
+  border-bottom: 4px solid #1A374D;
+}
+
+.flight-card:hover img {
+  transform: scale(1.15);
+}
+
+.custom-btn {
+  background-color: #1A374D;
+  border: none;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.custom-btn:hover {
+  background-color: #406882;
+  transform: translateY(-3px);
+}
+
+.stars i {
+  transition: color 0.3s ease-in-out;
+  font-size: 1.5rem;
+}
+
+.stars i:hover {
+  color: #FFDC00 !important;
+}

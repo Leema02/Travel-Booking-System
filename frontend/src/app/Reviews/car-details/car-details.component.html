@@ -1,0 +1,49 @@
+<!-- عرض تفاصيل السيارة -->
+<div class="container mt-5 d-flex justify-content-center">
+  <!-- Card لعرض تفاصيل السيارة -->
+  <div *ngIf="carDetails" class="card mb-4 shadow-lg car-card animate__animated animate__fadeInUp">
+    <img [src]="carDetails.car.picture_url || 'path/to/default/image.jpg'" class="card-img-top" alt="Car Image">
+    <div class="card-body text-center">
+      <h5 class="card-title">{{ carDetails.car.brand }}</h5>
+      <p class="card-text">Manufactured Date: {{ carDetails.car.man_date }}</p>
+      <p class="card-text">Price per Hour: ${{ carDetails.car.price_per_hour }}</p>
+      <p class="card-text">Color: {{ carDetails.car.colour }}</p>
+      <p class="card-text">Type: {{ carDetails.car.type }}</p>
+      <p class="card-text">
+        Average Rating:
+        <span class="stars">
+          <i class="fas fa-star" style="color: #FFD700;" *ngFor="let star of [].constructor(Math.floor(carDetails.average_rating))"></i>
+          <i class="fas fa-star-half-alt" style="color: #FFD700;" *ngIf="carDetails.average_rating % 1 >= 0.5"></i>
+          <i class="far fa-star" style="color: #FFD700;" *ngFor="let emptyStar of [].constructor(5 - Math.ceil(carDetails.average_rating))"></i>
+        </span>
+        {{ carDetails.average_rating | number: '1.1-2' }}
+      </p>
+      <p class="card-text"><small class="text-muted">Number of Reviews: {{ carDetails.number_of_reviews }}</small></p>
+      <button class="btn btn-primary custom-btn mt-3">Book Now</button> <!-- زر لحجز السيارة -->
+    </div>
+  </div>
+</div>
+
+<!-- قسم التعليقات -->
+<div class="container mt-5">
+  <div class="reviews-body" *ngIf="reviews.length > 0">
+    <ul class="list-unstyled">
+      <li *ngFor="let review of reviews">
+        <div class="media mb-4 p-4 review-card animate__animated animate__fadeInUp">
+          <img src="/assets/images/commenter-1.jpg" class="me-3 rounded-circle reviewer-image" alt="reviewer-image" width="64">
+          <div class="media-body">
+            <h4 class="reviewer-name mb-2">{{ review.username }}</h4>
+            <div class="d-flex align-items-center mb-2">
+              <div class="text-warning stars">
+                <i class="fas fa-star" *ngFor="let star of [].constructor(review.rating)"></i>
+                <i class="far fa-star" *ngFor="let emptyStar of [].constructor(5 - review.rating)"></i>
+              </div>
+              <span class="text-muted ms-2">{{ review.date }}</span> <!-- تاريخ التعليق -->
+            </div>
+            <p class="review-text">{{ review.comment }}</p>
+          </div><!-- end media-body -->
+        </div><!-- end media -->
+      </li>
+    </ul>
+  </div>
+</div>

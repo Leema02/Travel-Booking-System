@@ -11,7 +11,7 @@ export class GetFlightsService {
   }
 
   getFlights() {
-    return this.http.get<any>('http://localhost:8000/api/flights/search/all');
+    return this.http.get<any>('http://localhost/project/backend/public/api/flights/search/all');
   }
 
 }
