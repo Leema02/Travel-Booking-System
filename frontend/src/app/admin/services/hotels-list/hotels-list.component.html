@@ -69,7 +69,7 @@
           <td *ngIf="editIndex !== i">{{ hotel.price_per_night }}</td>
           <td>{{ hotel.description }}</td>
           <td>{{ hotel.rating }}</td>
-          <!-- Editable Number of Rooms Available field only during edit mode -->
+
           <td *ngIf="editIndex === i">
             <input [(ngModel)]="hotel.number_of_rooms_available" class="form-control" />
           </td>

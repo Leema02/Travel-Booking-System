@@ -79,7 +79,7 @@ class HotelController extends Controller
             'name' => 'required|string',
             'description' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
-            'address' => 'required|string',
+            'location' => 'required|string',
             'thumbnail_url' => 'required|url',
             'number_of_rooms_available' => 'required|integer|min:0',
             'price_per_night' => 'required|numeric|min:0',

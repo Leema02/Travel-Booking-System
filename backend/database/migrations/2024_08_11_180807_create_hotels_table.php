@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->tinyInteger('rating');
-            $table->string('address');
+            $table->string('location');
             $table->string('thumbnail_url');
             $table->integer('number_of_rooms_available');
             $table->decimal('price_per_night', 8, 2);

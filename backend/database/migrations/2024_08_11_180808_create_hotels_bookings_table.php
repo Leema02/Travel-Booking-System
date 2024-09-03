@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('hotels_bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->string('user_name')->nullable();
+            $table->string('user_email')->nullable();
             $table->foreignId('hotel_id')->constrained('hotels');
+            $table->string('hotel_name')->nullable();
+            $table->string('hotel_address')->nullable();
             $table->foreignId('review_id')->nullable()->constrained('reviews');
             $table->date('start_date');
             $table->date('end_date');

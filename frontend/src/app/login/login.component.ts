@@ -1,9 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';
-import {CommonModule} from "@angular/common";
+import { Router } from '@angular/router';  // Import Router
 
 @Component({
   standalone: true,
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router  // Inject Router
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginForm.value).subscribe(
         response => {
           console.log('Login successful!', response);
+          if (response.user.role===0)
+            this.router.navigate(['/home']);  // Navigate to the home page (root)
+          else if (response.user.role===1)
+            this.router.navigate(['/admin']);
 
           // Store user ID in localStorage
           if (response.success) {

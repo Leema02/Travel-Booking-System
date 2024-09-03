@@ -158,4 +158,10 @@ class FlightsBookingController extends Controller
         }
     }
 
+    public function listFlightBookings(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $flightBookings = FlightsBooking::all();
+        return response()->json( $flightBookings);
+    }
+
 }
