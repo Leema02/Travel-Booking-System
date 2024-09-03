@@ -58,7 +58,7 @@ import {HotelsService} from "../../../services/hotels.service";
     this.showAddHotelForm = false;
     this.newHotel = {
       name: '',
-      location: '',
+      location:'',
       price_per_night: null,
       description: '',
       rating: null,
@@ -76,6 +76,7 @@ import {HotelsService} from "../../../services/hotels.service";
       this.hotelService.deleteHotel(id).subscribe(
       ()=> {
           this.hotels = this.hotels.filter(hotel => hotel.id !== id);
+        this.loadHotels();
           console.log('Hotel deleted successfully');
         },
         error => {

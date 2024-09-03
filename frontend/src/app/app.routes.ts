@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 
 import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
 import {BookingsComponent} from "./admin/bookings/bookings.component";
-import {ReviewsComponent} from "./admin/reviews/reviews.component";
+// import {ReviewsComponent} from "./admin/reviews/reviews.component";
 import {ServicesComponent} from "./admin/services/services.component";
 import {FlightsListComponent} from "./admin/services/flights-list/flights-list.component";
 import {HotelsListComponent} from "./admin/services/hotels-list/hotels-list.component";
@@ -46,7 +46,7 @@ export const routes: Routes = [
     component: AdminDashboardComponent,
     children: [
       { path: 'bookings', component: BookingsComponent },
-      { path: 'reviews', component: ReviewsComponent },
+      // { path: 'reviews', component: ReviewsComponent },
       { path: 'services', component: ServicesComponent },
       { path: 'services/flights', component: FlightsListComponent },
       { path: 'services/hotels', component: HotelsListComponent },

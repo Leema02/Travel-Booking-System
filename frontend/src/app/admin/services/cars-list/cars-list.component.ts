@@ -16,8 +16,8 @@ import { Router } from '@angular/router';
 
 export class CarsListComponent implements OnInit {
 
-  cars: any[] = []; // Initialize as an empty array
-  editIndex: number | null = null; // Track which row is being edited
+  cars: any[] = [];
+  editIndex: number | null = null;
   newCar: any = {};
   showAddCarForm: boolean = false;
 
@@ -75,8 +75,8 @@ export class CarsListComponent implements OnInit {
     this.carsService.addCar(this.newCar).subscribe(
       response => {
         console.log('Car added successfully', response);
-        this.getCars(); // Refresh the car list
-        this.cancelForm(); // Close the form
+        this.getCars();
+        this.cancelForm();
       },
       error => {
         console.error('Error adding car:', error);
@@ -85,11 +85,11 @@ export class CarsListComponent implements OnInit {
   }
 
   showForm(): void {
-    this.showAddCarForm = true; // Show the form
+    this.showAddCarForm = true; //Show form
   }
 
   cancelForm(): void {
-    this.showAddCarForm = false; // Hide the form
+    this.showAddCarForm = false; //Hide form
   }
 }
 

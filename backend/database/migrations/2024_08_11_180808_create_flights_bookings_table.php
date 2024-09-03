@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('flights_bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->string('user_name')->nullable();
+            $table->string('user_email')->nullable();
             $table->foreignId('flight_id')->constrained('flights');
+            $table->string('flight_des')->nullable();
             $table->foreignId('review_id')->nullable()->constrained('reviews');
             $table->timestamps();
         });

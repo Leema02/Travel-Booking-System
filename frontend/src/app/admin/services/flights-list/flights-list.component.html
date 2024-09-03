@@ -35,7 +35,7 @@
         <input id="airline_name" name="airline_name" [(ngModel)]="newFlight.airline_name" class="form-control" required />
       </div>
       <div class="d-flex justify-content-between">
-<!--        <button type="submit" class="btn btn-success">Add Flight</button>-->
+
         <button type="submit" class="btn btn-success" [disabled]="!flightForm.valid">Add Flight</button>
         <button type="button" (click)="cancelForm()" class="btn btn-secondary">Cancel</button>
       </div>
