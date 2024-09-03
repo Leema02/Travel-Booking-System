@@ -20,7 +20,11 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-
+.img-thumbnail {
+  width: 110px;
+  height: auto;
+  object-fit: cover;
+}
 .table {
   width: 100%;
   margin-top: 20px;
