@@ -66,11 +66,20 @@
           <!-- Editable Picture URL field only during edit mode -->
           <td *ngIf="editIndex === i">
             <input [(ngModel)]="car.picture_url" class="form-control" />
-          </td>
+<!--          </td>-->
+<!--          <td *ngIf="editIndex !== i">-->
+<!--            <a [href]="car.picture_url" target="_blank" *ngIf="car.picture_url">{{ car.picture_url }}</a>-->
+<!--            <span *ngIf="!car.picture_url">No URL</span>-->
+<!--          </td>-->
           <td *ngIf="editIndex !== i">
-            <a [href]="car.picture_url" target="_blank" *ngIf="car.picture_url">{{ car.picture_url }}</a>
-            <span *ngIf="!car.picture_url">No URL</span>
+            <div *ngIf="car.picture_url; else noImage">
+              <a [href]="car.picture_url" target="_blank">
+                <img [src]="car.picture_url" alt="Car Image" class="img-thumbnail" />
+              </a>
+            </div>
+            <ng-template #noImage>No URL</ng-template>
           </td>
+
           <td>{{ car.type }}</td>
           <td>
             <div class="icon-container">
