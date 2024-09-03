@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('departure_date');
             $table->string('airline_name'); // اسم شركة الطيران
-            $table->string('picture_url'); // صورة طيارة
+            $table->string('picture_url')->nullable(); // صورة طيارة
 
             $table->timestamps();
         });

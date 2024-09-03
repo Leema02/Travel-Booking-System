@@ -18,12 +18,11 @@ import {Router} from "@angular/router";
 })
 
 export class FlightsListComponent implements OnInit {
-  flights: any[] = []; // Initialize as an empty array
-  //flightsService = inject(FlightsService);
+  flights: any[] = [];
   editIndex: number | null = null; // Track which row is being edited
   newFlight: any = {};
   showAddFlightForm: boolean = false;
- // constructor(private flightsService: FlightsService) { }
+
   constructor(private flightsService: FlightsService, private router: Router) { }
 
   ngOnInit(): void {
@@ -33,7 +32,7 @@ export class FlightsListComponent implements OnInit {
   getFlights(): void {
     this.flightsService.getFlights().subscribe(
       data => {
-        this.flights = data; // Assign API data to the component property
+        this.flights = data;
       },
       error => {
         console.error('Error fetching flights:', error);
@@ -45,13 +44,13 @@ export class FlightsListComponent implements OnInit {
   }
 
   saveFlight(flight: any): void {
-    // Your logic to save the updated flight, including only price and seats_left
+
     this.flightsService.updateFlight(flight.id, {
       price: flight.price,
       seats_left: flight.seats_left
     }).subscribe(response => {
       this.editIndex = -1; // Exit edit mode
-      // Handle success, e.g., show a success message or update the flight list
+
     });
   }
   cancelEdit(): void {

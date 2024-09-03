@@ -58,7 +58,7 @@ import {HotelsService} from "../../../services/hotels.service";
     this.showAddHotelForm = false;
     this.newHotel = {
       name: '',
-      address: '',
+      location:'',
       price_per_night: null,
       description: '',
       rating: null,
