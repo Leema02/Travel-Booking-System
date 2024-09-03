@@ -39,8 +39,10 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginForm.value).subscribe(
         response => {
           console.log('Login successful!', response);
-          // Redirect to home page on success
-          this.router.navigate(['/home']);  // Navigate to the home page (root)
+          if (response.user.role===0)
+            this.router.navigate(['/home']);  // Navigate to the home page (root)
+          else if (response.user.role===1)
+            this.router.navigate(['/admin']);
         },
         error => {
           if (error.status === 401) {
