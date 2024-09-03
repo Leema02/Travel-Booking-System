@@ -11,8 +11,8 @@
         <input id="name" name="name" [(ngModel)]="newHotel.name" class="form-control" required />
       </div>
       <div class="form-group">
-        <label for="location">Location:</label>
-        <input id="location" name="location" [(ngModel)]="newHotel.location" class="form-control" required />
+        <label for="address">Address:</label>
+        <input id="address" name="address" [(ngModel)]="newHotel.address" class="form-control" required />
       </div>
       <div class="form-group">
         <label for="price_per_night">Price per Night:</label>
@@ -48,7 +48,7 @@
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Location</th>
+          <th>Address</th>
           <th>Price per Night</th>
           <th>Description</th>
           <th>Rating</th>
@@ -61,7 +61,7 @@
         <tr *ngFor="let hotel of hotels; let i = index">
           <td>{{ hotel.id }}</td>
           <td>{{ hotel.name }}</td>
-          <td>{{ hotel.location }}</td>
+          <td>{{ hotel.address }}</td>
           <!-- Editable Price per Night field only during edit mode -->
           <td *ngIf="editIndex === i">
             <input [(ngModel)]="hotel.price_per_night" class="form-control" />
@@ -69,7 +69,7 @@
           <td *ngIf="editIndex !== i">{{ hotel.price_per_night }}</td>
           <td>{{ hotel.description }}</td>
           <td>{{ hotel.rating }}</td>
-          <!-- Editable Number of Rooms Available field only during edit mode -->
+
           <td *ngIf="editIndex === i">
             <input [(ngModel)]="hotel.number_of_rooms_available" class="form-control" />
           </td>

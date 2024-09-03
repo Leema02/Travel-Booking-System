@@ -1,1 +1,104 @@
-<p>bookings works!</p>
+<div class="container">
+  <div class="table-responsive">
+    <div class="d-flex justify-content-between align-items-center mb-3 bookings-header">
+      <h1>Cars Bookings</h1>
+    </div>
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>  <!-- New Column -->
+        <th>Email</th>     <!-- New Column -->
+        <th>Car ID</th>
+        <th>Car Brand</th> <!-- New Column -->
+        <th>Start Date</th>
+        <th>End Date</th>
+<!--        <th>Actions</th>-->
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let booking of carBookings">
+        <td>{{ booking.user_id }}</td>
+        <td>{{ booking.user_name }}</td>  <!-- New Data -->
+        <td>{{ booking.user_email }}</td> <!-- New Data -->
+        <td>{{ booking.car_id }}</td>
+        <td>{{ booking.car_brand }}</td> <!-- New Data -->
+        <td>{{ booking.start_date }}</td>
+        <td>{{ booking.end_date }}</td>
+<!--        <td>-->
+<!--          &lt;!&ndash; Actions like Edit/Delete can go here &ndash;&gt;-->
+<!--        </td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="container">
+    <div class="table-responsive">
+      <div class="d-flex justify-content-between align-items-center mb-3 bookings-header">
+        <h1>Hotels Bookings</h1>
+      </div>
+      <table class="table table-striped table-bordered">
+
+        <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Hotel ID</th>
+          <th>Hotel Name</th>
+          <th>Location</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let booking of hotelBookings">
+          <td>{{ booking.user_id }}</td>
+          <td>{{ booking.user_name }}</td>
+          <td>{{ booking.user_email }}</td>
+          <td>{{ booking.hotel_id }}</td>
+          <td>{{ booking.hotel_name }}</td>
+          <td>{{ booking.hotel_location }}</td>
+          <td>{{ booking.start_date }}</td>
+          <td>{{ booking.end_date }}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="table-responsive">
+      <div class="d-flex justify-content-between align-items-center mb-3 bookings-header">
+        <h1>Flights Bookings</h1>
+      </div>
+      <table class="table table-striped table-bordered">
+
+        <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Flight ID</th>
+          <th>Flight des</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let booking of flightBookings">
+          <td>{{ booking.user_id }}</td>
+          <td>{{ booking.user_name }}</td>
+          <td>{{ booking.user_email}}</td>
+          <td>{{ booking.flight_id }}</td>
+          <td>{{ booking.flight_des }}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

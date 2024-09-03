@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('car_bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->string('user_name')->nullable();
+            $table->string('user_email')->nullable();
             $table->foreignId('car_id')->constrained('cars');
+            $table->string('car_brand')->nullable();
             $table->foreignId('review_id')->nullable()->constrained('reviews');
             $table->date('start_date');
             $table->date('end_date');

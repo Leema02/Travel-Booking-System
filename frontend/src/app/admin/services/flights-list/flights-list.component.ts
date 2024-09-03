@@ -76,8 +76,8 @@ export class FlightsListComponent implements OnInit {
     this.flightsService.addFlight(this.newFlight).subscribe(
       response => {
         console.log('Flight added successfully', response);
-        this.getFlights(); // Refresh the flight list
-        this.cancelForm(); // Close the form
+        this.getFlights();
+        this.cancelForm();
       },
       error => {
         console.error('Error adding flight:', error);
