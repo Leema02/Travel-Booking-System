@@ -27,9 +27,11 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
+
             ],
             "scripts": [
               "src/assets/JS/main.js"
+
             ]
           },
           "configurations": {
@@ -89,11 +91,17 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css", "src/assets/css/normalize.css",
-              "src/assets/css/style.css"
+              "src/assets/css/style.css",
+
+              "https://unpkg.com/aos@2.3.1/dist/aos.css"
+
 
 
             ],
-            "scripts": [  "node_modules/aos/dist/aos.js"
+            "scripts": [  "node_modules/aos/dist/aos.js",
+
+              "https://unpkg.com/aos@2.3.1/dist/aos.js"
+
             ]
           }
         }

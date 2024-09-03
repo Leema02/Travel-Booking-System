@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   serverErrors: any = {};
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private loginService: LoginService, 
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
     private cdr: ChangeDetectorRef,
     private router: Router  // Inject Router
   ) {}
@@ -43,6 +43,14 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);  // Navigate to the home page (root)
           else if (response.user.role===1)
             this.router.navigate(['/admin']);
+
+          // Store user ID in localStorage
+          if (response.success) {
+            localStorage.setItem('userId', response.user.id);
+          }
+
+
+          // Redirect to home page on success
         },
         error => {
           if (error.status === 401) {
