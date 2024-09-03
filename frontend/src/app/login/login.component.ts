@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userId', response.user.id);
           }
 
+
           // Redirect to home page on success
-          this.router.navigate(['/home']);
         },
         error => {
           if (error.status === 401) {
