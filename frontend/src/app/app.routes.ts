@@ -21,6 +21,7 @@ import {RhotelDetailsComponent} from "./Reviews/rhotel-details/rhotel-details.co
 import {RflightDetailsComponent} from "./Reviews/rflight-details/rflight-details.component";
 import {HotelsPageeComponent} from "./Reviews/hotels-pagee/hotels-pagee.component";
 import {FlightsPageeComponent} from "./Reviews/flights-pagee/flights-pagee.component";
+import {AuthGuard} from "./auth.guard";
 
 
 export const routes: Routes = [
@@ -30,15 +31,16 @@ export const routes: Routes = [
   {path:'flights' , component:FlightsPageComponent},
   {path:'signup' , component:SignupComponent},
   {path:'login' , component:LoginComponent},
-  {path:'home' , component:HomeComponent},
 
-  { path: 'home/list/car', component: CarsPageeComponent },
-  { path: 'home/Review/:carId', component: CarDetailsComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, // Add the guard here
+
+  { path: 'home/list/car', component: CarsPageeComponent, canActivate: [AuthGuard] },
+  { path: 'home/Review/:carId', component: CarDetailsComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/car', pathMatch: 'full' },
-  { path: 'home/Rhotels', component: HotelsPageeComponent },
-  { path: 'home/Rflights', component: FlightsPageeComponent },
-  { path: 'home/Review/hotel/:hotelId', component: RhotelDetailsComponent },
-  { path: 'home/Review/flight/:flightId', component: RflightDetailsComponent },
+  { path: 'home/Rhotels', component: HotelsPageeComponent, canActivate: [AuthGuard] },
+  { path: 'home/Rflights', component: FlightsPageeComponent, canActivate: [AuthGuard] },
+  { path: 'home/Review/hotel/:hotelId', component: RhotelDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'home/Review/flight/:flightId', component: RflightDetailsComponent, canActivate: [AuthGuard] },
 
 
   {

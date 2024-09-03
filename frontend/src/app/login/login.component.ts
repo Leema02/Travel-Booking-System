@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Router } from '@angular/router';  // Import Router
+import { Router } from '@angular/router';
+import {CommonModule} from "@angular/common";
 
 @Component({
   standalone: true,
@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
   serverErrors: any = {};
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private loginService: LoginService, 
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
     private cdr: ChangeDetectorRef,
-    private router: Router  // Inject Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,8 +39,14 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginForm.value).subscribe(
         response => {
           console.log('Login successful!', response);
+
+          // Store user ID in localStorage
+          if (response.success) {
+            localStorage.setItem('userId', response.user.id);
+          }
+
           // Redirect to home page on success
-          this.router.navigate(['/home']);  // Navigate to the home page (root)
+          this.router.navigate(['/home']);
         },
         error => {
           if (error.status === 401) {
