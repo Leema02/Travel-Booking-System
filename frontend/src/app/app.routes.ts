@@ -32,13 +32,13 @@ export const routes: Routes = [
   {path:'login' , component:LoginComponent},
   {path:'home' , component:HomeComponent},
 
-  { path: 'list/car', component: CarsPageeComponent },
-  { path: 'Review/:carId', component: CarDetailsComponent },
+  { path: 'home/list/car', component: CarsPageeComponent },
+  { path: 'home/Review/:carId', component: CarDetailsComponent },
   { path: '', redirectTo: '/car', pathMatch: 'full' },
-  { path: 'Rhotels', component: HotelsPageeComponent },
-  { path: 'Rflights', component: FlightsPageeComponent },
-  { path: 'Review/hotel/:hotelId', component: RhotelDetailsComponent },
-  { path: 'Review/flight/:flightId', component: RflightDetailsComponent },
+  { path: 'home/Rhotels', component: HotelsPageeComponent },
+  { path: 'home/Rflights', component: FlightsPageeComponent },
+  { path: 'home/Review/hotel/:hotelId', component: RhotelDetailsComponent },
+  { path: 'home/Review/flight/:flightId', component: RflightDetailsComponent },
 
 
   {

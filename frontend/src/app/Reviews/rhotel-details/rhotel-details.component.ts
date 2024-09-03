@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { RhotelService } from '../rhotel.service';
 import { DecimalPipe, NgForOf, NgIf } from '@angular/common';
 
@@ -7,11 +7,12 @@ import { DecimalPipe, NgForOf, NgIf } from '@angular/common';
   selector: 'app-rhotel-details',
   templateUrl: './rhotel-details.component.html',
   standalone: true,
-  imports: [
-    DecimalPipe,
-    NgIf,
-    NgForOf
-  ],
+    imports: [
+        DecimalPipe,
+        NgIf,
+        NgForOf,
+        RouterLink
+    ],
   styleUrls: ['./rhotel-details.component.css']
 })
 export class RhotelDetailsComponent implements OnInit {

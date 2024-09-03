@@ -20,7 +20,7 @@
             {{ flight.average_rating ? (flight.average_rating | number: '1.1-2') : 'No rating' }}
           </p>
           <p class="card-text"><small class="text-muted">Number of Reviews: {{ flight.number_of_reviews || 0 }}</small></p>
-          <a [routerLink]="['/Review/flight', flight.flight.id]" class="btn btn-primary custom-btn">View Details</a>
+          <a [routerLink]="['/home/Review/flight', flight.flight.id]" class="btn btn-primary custom-btn">View Details</a>
         </div>
       </div>
     </div>

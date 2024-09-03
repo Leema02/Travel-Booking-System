@@ -19,7 +19,7 @@
             {{ car.average_rating | number: '1.1-2' }}
           </p>
           <p class="card-text"><small class="text-muted">Number of Reviews: {{ car.number_of_reviews }}</small></p>
-          <a [routerLink]="['/Review', car.car.id]" style="color: white" class="btn btn-primary custom-btn">View Details</a>
+          <a [routerLink]="['/home/Review', car.car.id]" style="color: white" class="btn btn-primary custom-btn">View Details</a>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Merriweather:wght@700&display=swap">
 
 <div class="bodyy container mt-5">
@@ -21,7 +22,7 @@
             {{ hotel.average_rating ? (hotel.average_rating | number: '1.1-2') : 'No Ratings Yet' }}
           </p>
           <p class="card-text"><small class="text-muted">Number of Reviews: {{ hotel.number_of_reviews }}</small></p>
-          <a [routerLink]="['/Review/hotel/', hotel.hotel.id]" style="color: white" class="btn btn-primary custom-btn">View Details</a>
+          <a [routerLink]="['/home/Review/hotel/', hotel.hotel.id]" style="color: white" class="btn btn-primary custom-btn">View Details</a>
         </div>
       </div>
     </div>

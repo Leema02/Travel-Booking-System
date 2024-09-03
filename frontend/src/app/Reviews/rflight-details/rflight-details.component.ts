@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { RflightService } from "../rflight.service";
 import { DatePipe, DecimalPipe, NgClass, NgForOf, NgIf } from "@angular/common";
 
@@ -7,13 +7,14 @@ import { DatePipe, DecimalPipe, NgClass, NgForOf, NgIf } from "@angular/common";
   selector: 'app-rflight-details',
   templateUrl: './rflight-details.component.html',
   standalone: true,
-  imports: [
-    DecimalPipe,
-    NgIf,
-    NgForOf,
-    DatePipe,
-    NgClass
-  ],
+    imports: [
+        DecimalPipe,
+        NgIf,
+        NgForOf,
+        DatePipe,
+        NgClass,
+        RouterLink
+    ],
   styleUrls: ['./rflight-details.component.css']
 })
 export class RflightDetailsComponent implements OnInit {

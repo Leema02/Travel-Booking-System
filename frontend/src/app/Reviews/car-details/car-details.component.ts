@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { CarService } from '../car.service';
 import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
 
@@ -7,11 +7,12 @@ import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
   selector: 'app-car-details',
   templateUrl: './car-details.component.html',
   standalone: true,
-  imports: [
-    DecimalPipe,
-    NgIf,
-    NgForOf
-  ],
+    imports: [
+        DecimalPipe,
+        NgIf,
+        NgForOf,
+        RouterLink
+    ],
   styleUrls: ['./car-details.component.css']
 })
 export class CarDetailsComponent implements OnInit {
