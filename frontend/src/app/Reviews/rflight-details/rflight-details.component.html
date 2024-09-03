@@ -1,0 +1,51 @@
+
+
+<!-- عرض تفاصيل الرحلة -->
+<div class="container mt-5 d-flex justify-content-center">
+  <!-- Flight Card لعرض تفاصيل الرحلة -->
+  <div *ngIf="flightDetails" class="card mb-4 shadow-lg flight-card animate__animated animate__fadeInUp">
+    <img [src]="flightDetails.flight.picture_url || 'path/to/default/image.jpg'" class="card-img-top" alt="Flight Image">
+    <div class="card-body text-center">
+      <h5 class="card-title">{{ flightDetails.flight.airline_name || 'Unknown Airline' }}</h5>
+      <p class="card-text"><strong>Departure:</strong> {{ flightDetails.flight.departure || 'N/A' }}</p>
+      <p class="card-text"><strong>Destination:</strong> {{ flightDetails.flight.dest || 'Unknown Destination' }}</p>
+      <p class="card-text"><strong>Price:</strong> ${{ flightDetails.flight.price || 'N/A' }}</p>
+      <p class="card-text"><strong>Departure Date:</strong> {{ flightDetails.flight.departure_date | date:'yyyy-MM-dd' }}</p>
+      <p class="card-text"><strong>Description:</strong> {{ flightDetails.flight.description || 'No description available' }}</p>
+      <p class="card-text"><strong>Seats Left:</strong> {{ flightDetails.flight.seats_left || 'N/A' }}</p>
+      <p class="card-text"><strong>Average Rating:</strong>
+        <span class="stars">
+          <i class="fas fa-star" style="color: #FFD700;" *ngFor="let star of [].constructor(Math.floor(flightDetails.average_rating))"></i>
+          <i class="fas fa-star-half-alt" style="color: #FFD700;" *ngIf="flightDetails.average_rating % 1 >= 0.5"></i>
+          <i class="far fa-star" style="color: #FFD700;" *ngFor="let emptyStar of [].constructor(5 - Math.ceil(flightDetails.average_rating))"></i>
+        </span>
+        {{ flightDetails.average_rating | number: '1.1-2' }}
+      </p>
+      <button class="btn btn-primary custom-btn mt-3">Book Now</button> <!-- زر لحجز الرحلة -->
+    </div>
+  </div>
+</div>
+
+<!-- قسم التعليقات -->
+<div class="container mt-5">
+  <div class="reviews-body" *ngIf="reviews.length > 0">
+    <ul class="list-unstyled">
+      <li *ngFor="let review of reviews">
+        <div class="media mb-4 p-4 review-card animate__animated animate__fadeInUp">
+          <img src="/assets/images/commenter-1.jpg" class="me-3 rounded-circle reviewer-image" alt="Reviewer Image" width="64">
+          <div class="media-body">
+            <h4 class="reviewer-name mb-2">{{ review.username }}</h4>
+            <div class="d-flex align-items-center mb-2">
+              <div class="text-warning stars">
+                <i class="fas fa-star" *ngFor="let star of [].constructor(review.rating)"></i>
+                <i class="far fa-star" *ngFor="let emptyStar of [].constructor(5 - review.rating)"></i>
+              </div>
+              <span class="text-muted ms-2">{{ review.date }}</span> <!-- تاريخ التعليق -->
+            </div>
+            <p class="review-text">{{ review.comment }}</p>
+          </div><!-- end media-body -->
+        </div><!-- end media -->
+      </li>
+    </ul>
+  </div>
+</div>

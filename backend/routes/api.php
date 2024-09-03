@@ -52,6 +52,11 @@ Route::get('/reviews/cars/stats', [ReviewController::class, 'getAllCarReviewStat
 Route::get('/reviews/flight/stats', [ReviewController::class, 'getAllFlightReviewStats']);
 Route::get('/reviews/hotel/stats', [ReviewController::class, 'getAllHotelReviewStats']);
 
+Route::get('/cars/{carId}/details-and-reviews', [ReviewController::class, 'getCarDetailsAndReviews']);
+Route::get('/hotels/{hotelId}/details-and-reviews', [ReviewController::class, 'getHotelDetailsAndReviews']);
+Route::get('/flights/{flightId}/details-and-reviews', [ReviewController::class, 'getFlightDetailsAndReviews']);
+
+
 Route::post('/users/register', [UserController::class, 'store']);
 
 // Flight APIs

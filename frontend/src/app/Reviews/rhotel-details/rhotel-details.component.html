@@ -1,0 +1,53 @@
+
+<!-- قسم تفاصيل الفندق -->
+<div class="container mt-5 d-flex justify-content-center">
+  <div *ngIf="hotelDetails" class="card mb-4 shadow-lg hotel-details-card animate__animated animate__fadeInUp">
+    <img [src]="hotelDetails.picture_url || 'path/to/default/hotel-image.jpg'" class="card-img-top img-fluid" alt="Hotel Image">
+    <div class="card-body text-center">
+      <h5 class="card-title">{{ hotelDetails.name }}</h5>
+      <p class="card-text">Location: {{ hotelDetails.location }}</p>
+      <p class="card-text">Price per Night: ${{ hotelDetails.price_per_night }}</p>
+      <p class="card-text">Description ${{ hotelDetails.description }}</p>
+      <p class="card-text">Stars: {{ hotelDetails.stars }}</p>
+      <p class="card-text">
+        Average Rating:
+        <span class="stars">
+          <i class="fas fa-star" style="color: #FFD700;" *ngFor="let star of [].constructor(Math.floor(averageRating || 0))"></i>
+          <i class="fas fa-star-half-alt" style="color: #FFD700;" *ngIf="averageRating % 1 >= 0.5"></i>
+          <i class="far fa-star" style="color: #FFD700;" *ngFor="let emptyStar of [].constructor(5 - Math.ceil(averageRating || 0))"></i>
+        </span>
+        {{ averageRating ? (averageRating | number: '1.1-2') : 'No Ratings Yet' }}
+      </p>
+      <p class="card-text"><small class="text-muted">Number of Reviews: {{ numberOfReviews }}</small></p>
+      <p class="card-text">{{ hotelDetails.description }}</p> <!-- إضافة وصف الفندق -->
+      <button class="btn btn-primary custom-btn mt-3">Book Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- قسم التعليقات -->
+<div class="container mt-5">
+  <div class="reviews-body" *ngIf="reviews.length > 0">
+    <ul class="list-unstyled">
+      <li *ngFor="let review of reviews">
+        <div class="media mb-4 p-4 review-card animate__animated animate__fadeInUp">
+          <img src="/assets/images/commenter-1.jpg" class="me-3 rounded-circle reviewer-image" alt="reviewer-image" width="64">
+          <div class="media-body">
+            <h4 class="reviewer-name mb-2">{{ review.username }}</h4>
+            <div class="d-flex align-items-center mb-2">
+              <div class="text-warning stars">
+                <i class="fas fa-star" *ngFor="let star of [].constructor(review.rating)"></i>
+                <i class="far fa-star" *ngFor="let emptyStar of [].constructor(5 - review.rating)"></i>
+              </div>
+              <span class="text-muted ms-2">{{ review.date }}</span>
+            </div>
+            <p class="review-text">{{ review.comment }}</p>
+          </div><!-- end media-body -->
+        </div><!-- end media -->
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="reviews.length === 0" class="text-center mt-4">
+    <p>No reviews available for this hotel.</p>
+  </div>
+</div>

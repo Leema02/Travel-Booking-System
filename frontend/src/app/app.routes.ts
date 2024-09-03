@@ -15,6 +15,12 @@ import {ServicesComponent} from "./admin/services/services.component";
 import {FlightsListComponent} from "./admin/services/flights-list/flights-list.component";
 import {HotelsListComponent} from "./admin/services/hotels-list/hotels-list.component";
 import {CarsListComponent} from "./admin/services/cars-list/cars-list.component";
+import {CarDetailsComponent} from "./Reviews/car-details/car-details.component";
+import {CarsPageeComponent} from "./Reviews/cars-pagee/cars-pagee.component";
+import {RhotelDetailsComponent} from "./Reviews/rhotel-details/rhotel-details.component";
+import {RflightDetailsComponent} from "./Reviews/rflight-details/rflight-details.component";
+import {HotelsPageeComponent} from "./Reviews/hotels-pagee/hotels-pagee.component";
+import {FlightsPageeComponent} from "./Reviews/flights-pagee/flights-pagee.component";
 
 
 export const routes: Routes = [
@@ -25,6 +31,15 @@ export const routes: Routes = [
   {path:'signup' , component:SignupComponent},
   {path:'login' , component:LoginComponent},
   {path:'home' , component:HomeComponent},
+
+  { path: 'home/list/car', component: CarsPageeComponent },
+  { path: 'home/Review/:carId', component: CarDetailsComponent },
+  { path: '', redirectTo: '/car', pathMatch: 'full' },
+  { path: 'home/Rhotels', component: HotelsPageeComponent },
+  { path: 'home/Rflights', component: FlightsPageeComponent },
+  { path: 'home/Review/hotel/:hotelId', component: RhotelDetailsComponent },
+  { path: 'home/Review/flight/:flightId', component: RflightDetailsComponent },
+
 
   {
     path: 'admin',
